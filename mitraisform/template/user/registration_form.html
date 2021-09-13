@@ -1,0 +1,244 @@
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid w-50 mt-lg-3 w-25 p-3">
+        <h2 id="title">{{ title }}</h2>
+        <div class="p-5" style="background-color: #f7f7f7;">
+            <form action="" method="post" id="form1">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert mb-lg-4" id="jsonMessage" style="display:none; font-size: 17px;">
+                            <h5 id="json_header"></h5>
+                            <span id="json_message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <input class="form-group form-control form-control-lg" type="text" name="mobile_number" id="mobile_number" placeholder="Mobile Number: +628112345678"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <input class="form-group form-control form-control-lg" type="text" name="first_name" id="first_name" placeholder="First Name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <input class="form-group form-control form-control-lg" type="text" name="last_name" id="last_name" placeholder="Last Name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="mb-2">
+                        Date of Birth
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="mb-4">
+                            <select class="form-group form-control form-control-lg" name="month_birth" id="month_birth">
+                                <option value="">Month</option>
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Des">Des</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-group form-control form-control-lg" name="date_birth" id="date_birth">
+                            <option value="">Date</option>
+                            {% for i in '1234567891011121314151617181920'|make_list %}
+                                <option>{{ forloop.counter }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-group form-control form-control-lg" name="year_birth" id="year_birth">
+                            <option value="">Year</option>
+                            {% for item in "x"|ljust:"1970" %}
+                                <option>{{ item }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="mb-4 mt-4">
+                            <input type="radio" name="gender" id="male" value="male" class="form-group form-control form-control-lg" checked/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-4 mt-4">
+                            <label for="male" class="label-default" style="font-size: 20px; cursor: pointer;">Male</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="mb-4 mt-4">
+                            <input type="radio" name="gender" id="female" value="female" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-4 mt-4">
+                            <label for="female" class="label-default" style="font-size: 20px; cursor: pointer;">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <input class="form-group form-control form-control-lg" type="text" name="email" id="email" placeholder="Email"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary w-100 p-2" name="register" id="register">
+                            <font class="text-center" style="font-size: 20px;">Register</font>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bg-primary p-5 text-center" id="footer">
+                    <a href="{% url 'userLogin' %}" class="btn btn-primary w-100 p-2" style="display: none; font-size: 20px;" id="login">
+                        <font class="text-center">Login</font>
+                    </a>
+                    <h3 class="text-light" id="footer_text">Footer</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>-->
+    <script>
+        $(document).ready(function(){
+            // $('#mobile_number').inputmask('');
+            $("#register").on("click",function(){
+                var mobile_number = $("#mobile_number").val();
+                var first_name = $("#first_name").val();
+                var last_name = $("#last_name").val();
+                var month_birth = $("#month_birth").val();
+                var date_birth = $("#date_birth").val();
+                var year_birth = $("#year_birth").val();
+                var gender = $("#gender").val();
+                var email = $("#email").val();
+                var numString = "+62";
+                // var testPattern = new RegExp("^(\\+)?(\\d+)$");
+                // var result = testPattern.test(mobile_number);
+                // console.log(result);
+                if (mobile_number == "") {
+                    $("#mobile_number").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Your mobile number cannot be empty");
+                }else if(mobile_number.substring(0,3) != "+62") {
+                    $("#mobile_number").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Please input valid mobile number, for example: +62812");
+                }else if(mobile_number.length < 12){
+                    $("#mobile_number").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Minimum mobile number equals to 12 digits. Please try again");
+                }else if (first_name == "") {
+                    $("#first_name").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Your first name cannot be empty");
+                }else if(last_name == "") {
+                    $("#last_name").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Your last name cannot be empty");
+                }else if(email == "") {
+                    $("#email").focus();
+                    $("#jsonMessage").show();
+                    $("#jsonMessage").show().addClass(" alert-danger");
+                    $("#json_header").html("Error!");
+                    $("#json_message").html("Your email cannot be empty");
+                }else{
+                    $.ajax({
+                        type:"post",
+                        data:$("#form1").serialize(),
+                        dataType:"json",
+                        url:"{% url 'regForm' %}",
+                        success:function(message){
+                            if (message['message_status'] == "0") {
+                                $("#jsonMessage").show();
+                                $("#jsonMessage").removeClass("alert-danger alert-warning").addClass(" alert-success");
+                                $("#json_header").html("Success!");
+                                $("#json_message").html("Your data has been successfully submitted");
+                                $("#register").removeClass("btn-primary").addClass("btn-secondary");
+                                $("#footer").removeClass("bg-primary").addClass("bg-secondary");
+                                $("#footer_text").hide();
+                                $("#form1 :input").prop("disabled", true);
+                                $("#login").show();
+                                $("#title").addClass("text-secondary");
+                            }else if(message['message_status'] == "1"){
+                                $("#jsonMessage").show();
+                                $("#jsonMessage").removeClass("alert-danger").addClass(" alert-warning");
+                                $("#json_header").html("Warning!");
+                                $("#json_message").html("Your data already registered. Please try again");
+                            }else if(message['message_status'] == "2"){
+                                $("#jsonMessage").html(message);
+                                $("#jsonMessage").show();
+                                $("#jsonMessage").removeClass(" alert-warning alert-success").addClass(" alert-danger");
+                                $("#json_header").html("Error!");
+                                $("#json_message").html("Your data has not been submitted from backend views");
+                            }else{
+                                alert(message);
+                                $("#jsonMessage").html(message);
+                                $("#jsonMessage").show();
+                                $("#jsonMessage").removeClass(" alert-warning alert-success").addClass(" alert-danger");
+                                $("#json_header").html("jQuery Error!");
+                                $("#json_message").html("Some error from jquery side");
+                            }
+                        },
+                        error:function(error){
+                            // $("#jsonMessage").html("jQuery Error!");
+                            // $("#jsonMessage").html("{{ message_header }}");
+                            $("#jsonMessage").show().removeClass(" alert-success").addClass(" alert-danger");
+                            $("#json_header").html("Error!");
+                            $("#json_message").html(error['message_body']);
+                            console.log(message)
+                        }
+                    })
+                }
+                return false;
+            })
+        })
+    </script>
+</body>
+</html>
